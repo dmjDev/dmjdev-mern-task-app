@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+body {
+    background: #202020;
+    color: white;
+}
+
+.my-button {
+    @apply 
+    border 
+    rounded-lg 
+    border-zinc-600 
+    bg-zinc-700 
+    
+    px-4 
+    py-2 
+    font-medium 
+    text-white 
+    whitespace-nowrap 
+    overflow-hidden 
+    
+    focus:border-0
+    focus:ring-offset-transparent   
+    focus:bg-cyan-700 
+    focus:outline-hidden
+    focus:outline-none 
+    
+    active:bg-amber-800  
+
+    hover:border-transparent 
+    hover:bg-cyan-700 
+    hover:cursor-pointer 
+}
+
+.my-button-form {
+    @apply 
+    text-2xl 
+    text-white 
+    font-medium 
+    justify-center 
+
+    flex 
+    items-center 
+    mt-10 
+    py-1 
+    w-full 
+
+    border 
+    border-transparent 
+    rounded-md 
+    bg-cyan-700 
+
+    focus:border-0
+    focus:ring-offset-transparent 
+    focus:bg-zinc-700  
+    focus:outline-hidden
+    focus:outline-none 
+    
+    active:bg-amber-800 
+    
+    hover:bg-zinc-700 
+    hover:cursor-pointer 
+}
