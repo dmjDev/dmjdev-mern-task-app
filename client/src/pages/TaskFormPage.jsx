@@ -16,6 +16,10 @@ const TaskFormPage = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        getTasks()
+    }, [])
+
+    useEffect(() => {
         async function loadTask() {
             if (params.id) {
                 const task = await getTask(params.id)

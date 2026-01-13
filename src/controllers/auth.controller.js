@@ -56,35 +56,20 @@ export const login = async (req, res) => {
     }
 }
 
-export const logout = (req, res) => {
-    // try {
-    //     // Clear the cookie by setting its expiration to the past
-    //     res.cookie("token", "", {
-    //         expires: new Date(0),
-    //         httpOnly: true,
-    //         secure: true,      // Set to true if using HTTPS
-    //         sameSite: "none",  // Required for cross-site cookies
-    //     })
+// export const profile = async (req, res) => {
+//     const userFound = await User.findById(req.user.id)
+//     if (!userFound) return res.status(400).json({ message: "User not found" })
+//     return res.json({
+//         id: userFound._id,
+//         username: userFound.username,
+//         email: userFound.email,
+//         createdAt: userFound.createdAt,
+//         updatedAt: userFound.updatedAt
+//     })
+// }
 
-    //     // Use return to ensure no other code in this function runs
-    //     return res.status(200).json({ message: "Successfully logged out" })
-    // } catch (error) {
-    //     return res.status(500).json({ message: "Logout failed" })
-    // }
-}
 
-export const profile = async (req, res) => {
-    const userFound = await User.findById(req.user.id)
-    if (!userFound) return res.status(400).json({ message: "User not found" })
-    return res.json({
-        id: userFound._id,
-        username: userFound.username,
-        email: userFound.email,
-        createdAt: userFound.createdAt,
-        updatedAt: userFound.updatedAt
-    })
-}
-
+// VERIFICA EL TOKEN PARA ASEGURARSE QUE SE ESTÁ LOGUEADO CORRECTAMENTE, SUCEDE DURANTE LOS INTENTOS DE ACCEDER A LAS PARTES DE LA APP
 export const verifyToken = async (req, res) => {
     const {token} = req.cookies
 

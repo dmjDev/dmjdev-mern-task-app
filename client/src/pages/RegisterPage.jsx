@@ -8,21 +8,12 @@ import { FaEyeSlash } from "react-icons/fa";
 const RegisterPage = () => {
     const [mostrarPassword, setMostrarPassword] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm()
-    const { signup, isAuthenticated, errors: RegisterErrors } = useAuth()
+    const { signup, isAuthenticated, errors: RegisterErrors, loading } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (isAuthenticated) navigate('/tasks')
+        if (isAuthenticated) navigate('/')
     }, [isAuthenticated])
-
-    // const onSubmit = (e) => {
-    //     e.preventDefault()
-    //     if (e.target.password.value === e.target.confirmPassword.value) {
-    //         const hdSubmit = handleSubmit(async (values) => {
-    //             signup(values)
-    //         })
-    //     }
-    // }
 
     const password = watch("password");
     const onSubmit = handleSubmit(async (values) => {
@@ -76,7 +67,6 @@ const RegisterPage = () => {
                     </div>
                     {errors.password && <p className='text-[12px] text-red-500'>Password is required</p>}
                     <input
-                        // name='confirmPassword'
                         type="password"
                         className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
                         placeholder='Repeat password'
@@ -98,10 +88,19 @@ const RegisterPage = () => {
             </div>
         </div>
 
-    if (!isAuthenticated) {
+    const jsxmlLoading =
+        <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+            <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+                <h1 className="text-2xl font-bold">Loading...</h1>
+            </div>
+        </div>
+
+    if (loading) {
+        return jsxmlLoading
+    }
+    if (!isAuthenticated && !loading) {
         return jsxml
     }
-    return
 }
 
 export default RegisterPage

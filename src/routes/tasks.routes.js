@@ -6,8 +6,6 @@ import { createTaskSchema, updateTaskSchema } from '../schemas/task.schema.js'
 
 const router = Router()
 
-const func = () => {}
-
 router.get('/tasks', authRequired, getTasks)
 router.get('/tasks/:id', authRequired, getTask)
 router.post('/tasks', authRequired, validateSchema(createTaskSchema), createTask)

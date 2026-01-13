@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         async function checkLogin() {
             const cookies = Cookies.get()
-
+            
             if (!cookies.token) {
                 setUser(null)
                 setLoading(false)
@@ -40,10 +40,12 @@ export const AuthProvider = ({ children }) => {
                 setUser(res.data)
                 setLoading(false)
                 setIsAuthenticated(true)
+                return
             } catch (error) {
                 setUser(null)
                 setLoading(false)
                 setIsAuthenticated(false)
+                return
             }
         }
         checkLogin()
