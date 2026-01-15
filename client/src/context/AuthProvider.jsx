@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react"
-import { registerRequest, loginRequest, verifyTokenRequest } from '../api/auth'
-import { AuthContext } from './AuthContext';
 import Cookies from 'js-cookie'
+
+import { AuthContext } from './AuthContext';
+import { registerRequest, loginRequest, verifyTokenRequest } from '../api/auth'
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [errors, setErrors] = useState([])
     const [loading, setLoading] = useState(true)
+    const [failLogin, setFailLogin] = useState(0)
 
     useEffect(() => {
         if (errors.length > 0) {
@@ -21,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         async function checkLogin() {
             const cookies = Cookies.get()
-            
+
             if (!cookies.token) {
                 setUser(null)
                 setLoading(false)
@@ -55,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     const signup = async (user) => {
         try {
             const res = await registerRequest(user)
-            // console.log(res.data)
+            // console.log('register', res.data)
             setUser(res.data)
             setIsAuthenticated(true)
             setErrors([])
@@ -69,13 +71,21 @@ export const AuthProvider = ({ children }) => {
     const signin = async (user) => {
         try {
             const res = await loginRequest(user)
-            // console.log(res.data)
+            // console.log('login', res.data)
             setUser(res.data)
             setIsAuthenticated(true)
             setErrors([])
         } catch (error) {
-            // console.log('error Singin', error.response.data)
-            setErrors(error.response.data)
+            if (Array.isArray(error.response.data) && error.response.data.length > 0) {
+                // console.log('error Singin', error.response.data)
+                setErrors(error.response.data)
+            } else if (error.response.data.failLogin) {
+                const message = error.response.data.message
+                const failLogin = error.response.data.failLogin
+                // console.log('failLogin', message, failLogin)
+                setErrors([message])
+                setFailLogin(failLogin)
+            }
         }
     }
 
@@ -86,8 +96,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ signup, signin, logout, loading, user, isAuthenticated, errors }}>
-            { children }
+        <AuthContext.Provider value={{ signup, signin, logout, setLoading, loading, user, isAuthenticated, errors, failLogin }}>
+            {children}
         </AuthContext.Provider>
     )
 }

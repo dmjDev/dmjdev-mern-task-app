@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useAuth } from '../context/AuthContext'
 import { useNavigate, Link } from 'react-router-dom'
 import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa";
 
+import { useAuth } from '../context/AuthContext'
+
 const RegisterPage = () => {
+    const { signup, isAuthenticated, errors: RegisterErrors, loading } = useAuth()
     const [mostrarPassword, setMostrarPassword] = useState(false);
     const { register, handleSubmit, watch, formState: { errors } } = useForm()
-    const { signup, isAuthenticated, errors: RegisterErrors, loading } = useAuth()
     const navigate = useNavigate()
 
     useEffect(() => {

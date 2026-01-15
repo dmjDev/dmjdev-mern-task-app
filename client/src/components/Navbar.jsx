@@ -1,11 +1,18 @@
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
+
 import { useAuth } from '../context/AuthContext'
 import { useTasks } from "../context/TasksContext"
 
 export const Navbar = () => {
     const { user, isAuthenticated, logout } = useAuth()
     const { setTasks } = useTasks()
+
+    useEffect(() => {
+        // Cierra sesión al cerrar la pestaña del navegador pero no al refrescarla
+        const navigationEntries = performance.getEntriesByType("navigation")[0];
+        if (navigationEntries && navigationEntries.type !== "reload") closeSession()
+    }, [])
 
     const titleUser = () => {
         const username = user && isAuthenticated ? `- ${user.username}` : ''

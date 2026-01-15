@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
 import { AuthProvider } from './context/AuthProvider'
 import { TasksProvider } from './context/TasksProvider'
+
 import { Navbar } from './components/Navbar'
 
 import LoginPage from './pages/LoginPage'
@@ -22,6 +24,7 @@ const App = () => {
               <Route path='/' element={<HomePage />} />
               <Route path='*' element={<HomePage />} />
               <Route path='/login' element={<LoginPage />} />
+              <Route path='/login/:failCode' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route element={<ProtectedRoute />}>
                 <Route path='/tasks' element={<TasksPage />} />

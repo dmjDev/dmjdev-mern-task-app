@@ -1,5 +1,6 @@
-import { useTasks } from "../context/TasksContext"
 import { Link } from 'react-router-dom'
+
+import { useTasks } from "../context/TasksContext"
 import { TextComponent } from "./TextComponent"
 
 const TaskCard = ({ task }) => {

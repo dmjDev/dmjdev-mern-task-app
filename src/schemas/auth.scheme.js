@@ -8,7 +8,7 @@ export const registerSchema = z.object({
     .regex(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
             "Password must contain at least one uppercase letter, one lowercase letter and one number"
-        )
+        ),
 })
 
 export const loginSchema = z.object({
@@ -18,5 +18,5 @@ export const loginSchema = z.object({
     .regex(
             /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
             "User not found - (dev)regex"
-        )
+        ),
 })

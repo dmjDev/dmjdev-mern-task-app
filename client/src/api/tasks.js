@@ -1,4 +1,4 @@
-import axios from "./axios"
+import axios from "./_axios"
 
 export const getTasksRequest = () => axios.get("/tasks")
 export const getTaskRequest = (id) => axios.get(`/tasks/${id}`)

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export const connectDB = async () => {
+const connectDB = async () => {
     try {
         await mongoose.connect('mongodb://localhost/merndb')
         console.log('DB is connected')
@@ -8,3 +8,5 @@ export const connectDB = async () => {
         console.log(error)
     }
 }
+
+export default connectDB

@@ -1,22 +1,25 @@
-import { useForm } from "react-hook-form"
-import { useAuth } from "../context/AuthContext"
-import { useNavigate, Link } from 'react-router-dom'
 import { useEffect, useState } from "react"
+import { useNavigate, Link, useParams } from 'react-router-dom'
+import { useForm } from "react-hook-form"
 import { FaEye } from "react-icons/fa"
 import { FaEyeSlash } from "react-icons/fa";
 
+import { useAuth } from "../context/AuthContext"
+
 const LoginPage = () => {
+    const { signin, isAuthenticated, errors: signinErrors, loading, failLogin } = useAuth()
     const [mostrarPassword, setMostrarPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm()
-    const { signin, isAuthenticated, errors: signinErrors, loading } = useAuth()
     const navigate = useNavigate()
+    const params = useParams()
 
     useEffect(() => {
-        if (isAuthenticated) navigate('/')
-    }, [isAuthenticated])
+        if (isAuthenticated || failLogin >= 5) navigate('/')
+    }, [isAuthenticated, failLogin])
 
     const onSubmit = handleSubmit(data => {
-        signin(data)                                //// TODO FAILLOGIN COUNTER
+        params.failCode ? data.failCode = params.failCode : data.failCode = null
+        signin(data)
     })
 
     // Función para alternar el estado
@@ -74,7 +77,7 @@ const LoginPage = () => {
             </div>
         </div>
 
-    if (loading) {
+    if (loading || failLogin >= 5) {
         return jsxmlLoading
     }
     if (!isAuthenticated && !loading) {

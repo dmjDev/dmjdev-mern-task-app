@@ -1,4 +1,5 @@
 import {Router} from 'express'
+
 // import { login, register, profile, verifyToken } from '../controllers/auth.controller.js'
 import { login, register, verifyToken } from '../controllers/auth.controller.js'
 // import { authRequired } from '../middlewares/validateToken.js'

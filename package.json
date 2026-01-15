@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon --env-file=.env src/index.js"
   },
   "devDependencies": {
     "@types/bun": "latest",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.2",
     "morgan": "^1.10.1",
+    "nodemailer": "^7.0.12",
     "zod": "^4.3.5"
   }
 }

@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
         trim: true
+    },
+    failLogin: {
+        type: Number,
+        require: true
     }
 },{
     timestamps: true

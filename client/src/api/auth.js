@@ -1,4 +1,4 @@
-import axios from './axios'
+import axios from './_axios'
 
 export const registerRequest = user => axios.post('/register', user)
 export const loginRequest = user => axios.post('/login', user)
